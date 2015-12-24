@@ -216,6 +216,8 @@ then
       godep go install -v "${FLAGS[@]}" $pkgs
     fi
 else
+    step "Running: go get -v ${FLAGS[@]} $pkgs"
+    go get -v "${FLAGS[@]}" $pkgs
     step "Running: go install -v ${FLAGS[@]} $pkgs"
     go install -v "${FLAGS[@]}" $pkgs
 fi

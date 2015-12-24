@@ -96,7 +96,7 @@ finished() {
     echo "done"
 }
 
-
+ver=go1.5.2
 ver=$(expand_ver $ver)
 
 file=${GOFILE:-$ver.linux-amd64.tar.gz}

@@ -220,6 +220,7 @@ else
     go get -v "${FLAGS[@]}" $pkgs
 fi
 set -u
+ls -alh $GOPATH/bin
 
 if [ $? -ne 0 ] ; then
 	exit 1

@@ -96,40 +96,6 @@ finished() {
     echo "done"
 }
 
-if test -f $build/Godeps
-then
-    warn ""
-    warn "Deprecated, old ./Godeps file found!"
-    warn ""
-    warn "Support for this old version of Godeps is ending on 2016/02/01"
-    warn ""
-    warn "Please upgrade godeps (go get -u github.com/tools/godep) and"
-    warn "re-save your dependencies: godep save -r ./..."
-    warn ""
-    warn "See also: https://devcenter.heroku.com/articles/go-dependencies-via-godep"
-    warn ""
-    name=$(<$build/Godeps jq -r .ImportPath)
-    ver=$(<$build/Godeps jq -r .GoVersion)
-elif test -f $build/Godeps/Godeps.json
-then
-    step "Checking Godeps/Godeps.json file."
-    if ! jq -r . < $build/Godeps/Godeps.json > /dev/null
-    then
-        warn "Bad Godeps/Godeps.json file"
-        exit 1
-    fi
-    name=$(<$build/Godeps/Godeps.json jq -r .ImportPath)
-    ver=$(<$build/Godeps/Godeps.json jq -r .GoVersion)
-elif test -f $build/.godir
-then
-    warn "Deprecated, .godir file found! Please update to supported Godeps dependency manager."
-    warn "See https://github.com/tools/godep for usage information."
-    exit 1
-else
-    warn "Godeps are required. For instructions:"
-    warn "https://devcenter.heroku.com/articles/go-support"
-    exit 1
-fi
 
 ver=$(expand_ver $ver)
 
